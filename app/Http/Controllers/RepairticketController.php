@@ -7,17 +7,25 @@ use Illuminate\Http\Request;
 
 class RepairticketController extends Controller
 {
+
+     public function landing()
+     {
+        return view('welcome');
+     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('repairticket.index');
+        $Repairticket = repairticket::query()->orderby('created_at', 'desc')->get();
+        return view('dashboard',['Repairticket'=>$Repairticket]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
+
+
     public function create()
     {
         return view('repairticket.index');
@@ -29,13 +37,13 @@ class RepairticketController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'form-email' => ['required','string'],
-            'form-division' => ['required','string'],
-            'form-unitsection' => ['required','string'],
-            'form-name' => ['required','string'],
-           'form-designation' => ['required','string'],
+            'emailaddress' => ['required','string'],
+            'division' => ['required','string'],
+            'unitsection' => ['required','string'],
+            'name' => ['required','string'],
+           'designation' => ['required','string'],
            'typeofrequest' => ['required','string'],
-            'form-description' => ['required','string'],
+            'description' => ['required','string'],
         ]);
 
         $data["status"]= '';
@@ -44,7 +52,7 @@ class RepairticketController extends Controller
         $data["itemtype"]= '';
         $repairticket = repairticket::create($data);
 
-        return to_route('repairticket.index', $repairticket)->with('message','Created Successfully');
+        return to_route('repairticket.landing')->with('message','Created Successfully');
     }
 
     /**

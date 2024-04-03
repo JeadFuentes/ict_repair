@@ -4,13 +4,15 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RepairticketController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/dashboard', function () {
+Route::redirect('/dashboard','/repairticket')->name('dashboard');
+/*Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');*/
+
+Route::middleware('auth','verified')->group(function(){
+    Route::get('/repairticket', [RepairticketController::class, 'index'])->name('repairticket.index');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -20,4 +22,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('repairticket', RepairticketController::class);
+//Route::resource('repairticket', RepairticketController::class);
+
+Route::post('/repairticket', [RepairticketController::class, 'store'])->name('repairticket.store');
+Route::get('/', [RepairticketController::class, 'landing'])->name('repairticket.landing');
