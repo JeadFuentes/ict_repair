@@ -54,7 +54,9 @@
                     </header>
 
                     <main>
-                        
+                        @session('message')
+                            <div class="alert alert-success">{{session('message')}}</div>
+                        @endsession
                         <div class = "container">
                             <div class = "text-adjust">
                                 <h1 class="text-center">SUBMIT REQUEST</h1>
@@ -63,12 +65,12 @@
                             <form action="{{ Route('repairticket.store') }}" method="POST" enctype = "multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="form-email">Email address</label>
-                                    <input type="email" class="form-control" name="form-email" id="form-email" placeholder="name@example.com">
+                                    <label for="emailaddress">Email address</label>
+                                    <input type="email" class="form-control" name="emailaddress" id="form-email" placeholder="name@example.com">
                                 </div>
                                 <div class="form-group">
-                                    <label for="form-division">Division</label>
-                                    <select class="form-control" name="form-division" id="form-division">
+                                    <label for="division">Division</label>
+                                    <select class="form-control" name="division" id="form-division">
                                     <option>MSD</option>
                                     <option>LHSD</option>
                                     <option>RLED</option>
@@ -76,8 +78,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="form-unitsection">Unit/Section</label>
-                                    <select class="form-control" name="form-unitsection" id="form-unitsection">
+                                    <label for="unitsection">Unit/Section</label>
+                                    <select class="form-control" name="unitsection" id="form-unitsection">
                                     <option>Communication Management Unit</option>
                                     <option>Family Health and Nutrition Cluster</option>
                                     <option>Finance Cluster</option>
@@ -107,12 +109,12 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="form-name">Requested By</label>
-                                    <input type="text" class="form-control textcaps" name="form-name" id="form-name" placeholder="Example: Juan Dela Cruz">
+                                    <label for="name">Requested By</label>
+                                    <input type="text" class="form-control textcaps" name="name" id="form-name" placeholder="Example: Juan Dela Cruz">
                                 </div>
                                 <div class="form-group">
-                                    <label for="form-designation">Designation</label>
-                                    <input type="text" class="form-control textcaps" name="form-designation" id="form-designation" placeholder="Example: Computer Programmer I / CP I">
+                                    <label for="designation">Designation</label>
+                                    <input type="text" class="form-control textcaps" name="designation" id="form-designation" placeholder="Example: Computer Programmer I / CP I">
                                 </div>
                                 <div class="form-group">
                                 <label>Type of Request</label>
@@ -161,8 +163,8 @@
                                     </label>
                                 </div>
                                 <div class="form-group">
-                                    <label for="form-description">Kindly Describe Issues encountered</label>
-                                    <textarea class="form-control textupper" name="form-description" id="form-description" rows="3"></textarea>
+                                    <label for="description">Kindly Describe Issues encountered</label>
+                                    <textarea class="form-control textupper" name="description" id="form-description" rows="3"></textarea>
                                 </div>
                                 <div class="form-btn">
                                         <button class="btn btn-primary">Register</button>
