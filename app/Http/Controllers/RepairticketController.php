@@ -17,8 +17,8 @@ class RepairticketController extends Controller
      */
     public function index()
     {
-        $Repairticket = repairticket::query()->orderby('created_at', 'desc')->get();
-        return view('dashboard',['Repairticket'=>$Repairticket]);
+        $Repairtickets = repairticket::query()->orderby('created_at', 'desc')->get();
+        return view('dashboard',['repairtickets'=>$Repairtickets]);
     }
 
     /**
@@ -46,7 +46,7 @@ class RepairticketController extends Controller
             'description' => ['required','string'],
         ]);
 
-        $data["status"]= '';
+        $data["status"]= 'ONGOING';
         $data["user_id"]= '';
         $data["addtlstatus"]= '';
         $data["itemtype"]= '';
@@ -60,6 +60,7 @@ class RepairticketController extends Controller
      */
     public function show(repairticket $repairticket)
     {
+        dd($repairticket);
         return 'show';
     }
 
@@ -68,14 +69,15 @@ class RepairticketController extends Controller
      */
     public function edit(repairticket $repairticket)
     {
-        return 'edit';
+        dd($repairticket);
+        return view('repairticket.edit', ['repairticket'=>$repairticket]);
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, repairticket $repairticket)
-    {
+    {   
         return 'update';
     }
 
