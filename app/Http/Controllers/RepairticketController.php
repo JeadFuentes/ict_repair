@@ -69,7 +69,6 @@ class RepairticketController extends Controller
      */
     public function edit(repairticket $repairticket)
     {
-        dd($repairticket);
         return view('repairticket.edit', ['repairticket'=>$repairticket]);
     }
 
@@ -78,7 +77,25 @@ class RepairticketController extends Controller
      */
     public function update(Request $request, repairticket $repairticket)
     {   
-        return 'update';
+        $data = $request->validate([
+            'emailaddress' => ['required','string'],
+            'timestamp' => ['nullable'],
+            'division' => ['required','string'],
+            'unitsection' => ['required','string'],
+            'name' => ['required','string'],
+           'designation' => ['required','string'],
+           'typeofrequest' => ['required','string'],
+            'description' => ['required','string'],
+            'status' => ['required','string'],
+            'addstatus' => ['required','string']
+        ]);
+        $data["user_id"]= $request->user()->id;
+        $data["itemtype"]= '';
+
+        $repairticket->update($data);
+        
+
+        return to_route('repairticket.index')->with('message','Updated Successfully');
     }
 
     /**

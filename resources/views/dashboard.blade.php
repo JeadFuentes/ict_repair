@@ -1,4 +1,9 @@
 <x-app-layout>
+    <div class="text-center pb-3">
+        @session('message')
+            <div class="alert alert-success">{{session('message')}}</div>
+        @endsession
+    </div>
     <div class = "container">
         <form action="admin.php" method="get" name="chkstatus" enctype = "multipart/form-data">
             <input type="hidden" class="form-Ongoing" name="form-status" id="nptstatus" >
@@ -38,6 +43,7 @@
                         <tr>
                         <th scope="col">ID/#</th>
                         <th scope="col">Timestamp</th>
+                        <th scope="col" hidden>Email</th>
                         <th scope="col">Division</th>
                         <th scope="col">Requested By:</th>
                         <th scope="col">Unit/Section</th>
@@ -53,6 +59,7 @@
                         <tr>
                             <th class = "id" scope="row">{{$repairticket->id}}</th>
                             <td class = "timestamp">{{$repairticket->created_at}}</td>
+                            <td class = "email" hidden>{{$repairticket->emailaddress}}</td>
                             <td class = "division">{{$repairticket->division}}</td>
                             <td class = "name">{{$repairticket->name}}</td>
                             <td class = "unitsection">{{$repairticket->unitsection}}</td>
@@ -63,7 +70,7 @@
                             <td class = "status">{{$repairticket->status}}</td>
                             <td>
                                 
-                                <a href="{{ Route('repairticket.edit', $repairticket) }}" class="edit"><p class="btn btn-primary btn-sm">Edit</p></a>
+                                <a href="{{ Route('repairticket.edit',['repairticket' => $repairticket]) }}" class="edit"><p class="btn btn-primary btn-sm">Edit</p></a>
 
                                 <a class="delete"><p class="btn btn-danger btn-sm">Delete</p></a>
                             </td>

@@ -2,51 +2,65 @@
     <div class = "container">
         <div class="text-center">
             <p class="h1">EDIT REQUEST</p>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
-        <form action="admin.php" method="post" enctype = "multipart/form-data">
+        <form action="{{ Route('repairticket.update', ['repairticket' => $repairticket])}}" method="post" enctype = "multipart/form-data">
             @csrf
+            @method('put')
             <div class="form-group">
-                <input type="hidden" class="form-id" name="form-ids" id="form-id" value="{{ $repairticket->id }}">
+                <input type="hidden" class="form-id" name="id" id="form-id" value="{{ $repairticket->id }}">
                 </div>
                 <div class="form-group">
-                    <label for="form-timestamp">Time Stamp</label>
-                    <input type="text" id="form-timestamp" class="form-control textcaps" name="form-timestamps" {{$repairticket->created_at}} readonly>
+                    <label for="emailaddress">Email address</label>
+                    <input type="email" class="form-control" name="emailaddress" id="form-email" value="{{$repairticket->emailaddress}}" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="form-division">Division</label>
-                    <input type="text" class="form-control textcaps" name="form-divisions" id="form-division" readonly>
+                    <label for="timestamp">Time Stamp</label>
+                    <input type="text" id="form-timestamp" class="form-control textcaps" name="timestamps" value="{{$repairticket->created_at}}" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="form-unitsection">Unit/Section</label>
-                    <input type="text" class="form-control textcaps" name="form-unitsections" id="form-unitsection" readonly>
+                    <label for="division">Division</label>
+                    <input type="text" class="form-control textupper" name="division" id="form-division" value="{{$repairticket->division}}" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="form-requestedby">Requested By</label>
-                    <input type="text" class="form-control textcaps" name="form-requestedbys" id="form-requestedby" readonly>
+                    <label for="unitsection">Unit/Section</label>
+                    <input type="text" class="form-control textcaps" name="unitsection" id="form-nitsection" value="{{$repairticket->unitsection}}"readonly>
                 </div>
                 <div class="form-group">
-                    <label for="form-designation">Designation</label>
-                    <input type="text" class="form-control textcaps" name="form-designations" id="form-designation" readonly>
+                    <label for="name">Requested By</label>
+                    <input type="text" class="form-control textcaps" name="name" id="form-requestedby" value="{{$repairticket->name}}"readonly>
                 </div>
                 <div class="form-group">
-                    <label for="form-typeofrequest">Type of Request</label>
-                    <input type="text" class="form-control textcaps" name="form-typeofrequests" id="form-typeofrequest" readonly>
+                    <label for="designation">Designation</label>
+                    <input type="text" class="form-control textcaps" name="designation" id="form-designation" value="{{$repairticket->designation}}" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="form-description">description</label>
-                    <input type="text" class="form-control textcaps" name="form-descriptions" id="form-description" readonly>
+                    <label for="typeofrequest">Type of Request</label>
+                    <input type="text" class="form-control textcaps" name="typeofrequest" id="form-typeofrequest" value="{{$repairticket->typeofrequest}}"readonly>
                 </div>
                 <div class="form-group">
-                    <label for="form-status">Status</label>
-                    <select class="form-control" name="form-statuss" id="form-status">
+                    <label for="description">description</label>
+                    <input type="text" class="form-control textcaps" name="description" id="form-description" value="{{$repairticket->description}}"readonly>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" name="status" id="form-status">
                     <option>Ongoing</option>
                     <option>Onhold</option>
                     <option>Closed</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="form-comment">Additional Comment</label>
-                    <textarea class="form-control textupper" name="form-comments" id="form-comment" rows="3"></textarea>
+                    <label for="addstatus">Additional Comment</label>
+                    <textarea class="form-control textupper" name="addstatus" id="form-comment" rows="3"></textarea>
                 </div>
                 <div class="form-btn">
                         <input type="submit" class="btn btn-primary" value="Save" name="save">
