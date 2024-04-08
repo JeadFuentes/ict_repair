@@ -15,6 +15,7 @@ Route::middleware('auth','verified')->group(function(){
     Route::get('/repairticket/{id}', [RepairticketController::class, 'show'])->name('repairticket.show');
     Route::get('/repairticket/{repairticket}/edit', [RepairticketController::class, 'edit'])->name('repairticket.edit');
     Route::put('/repairticket/{repairticket}/update', [RepairticketController::class, 'update'])->name('repairticket.update');
+    Route::delete('/repairticket/{repairticket}/', [RepairticketController::class, 'destroy'])->name('repairticket.delete');
 });
 
 Route::middleware('auth')->group(function () {

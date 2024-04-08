@@ -103,6 +103,8 @@ class RepairticketController extends Controller
      */
     public function destroy(repairticket $repairticket)
     {
-        return 'destroy';
+        $repairticket->delete();
+
+        return to_route('repairticket.index')->with('message','Deleted Successfully');
     }
 }

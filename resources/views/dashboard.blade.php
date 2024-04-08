@@ -71,8 +71,11 @@
                             <td>
                                 
                                 <a href="{{ Route('repairticket.edit',['repairticket' => $repairticket]) }}" class="edit"><p class="btn btn-primary btn-sm">Edit</p></a>
-
-                                <a class="delete"><p class="btn btn-danger btn-sm">Delete</p></a>
+                                <form action="{{ Route('repairticket.delete',['repairticket' => $repairticket]) }}" method="POST" enctype = "multipart/form-data" class="float-right">
+                                    @csrf
+                                    @method('delete')
+                                    <button> <a class="delete"><p class="btn btn-danger btn-sm">Delete</p></a></button>
+                                </form>
                             </td>
                             </tr>
                         @endforeach
